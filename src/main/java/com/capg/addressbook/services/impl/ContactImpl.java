@@ -87,5 +87,10 @@ public class ContactImpl implements ContactServices {
 		// TODO Auto-generated method stub
 		System.out.println(contact);
 	}
+	
+	@Override
+	public Contact getContact() {
+		return contact;
+	}
 
 }
