@@ -2,6 +2,8 @@ package com.capg.addressbook.services.impl;
 
 import com.capg.addressbook.dto.*;
 import java.util.*;
+import java.util.stream.Stream;
+
 import com.capg.addressbook.services.AddressBookServices;
 
 public class AddressBookImpl implements AddressBookServices {
@@ -91,9 +93,16 @@ public class AddressBookImpl implements AddressBookServices {
 	@Override
 	public boolean checkExistance(String name) {
 		// TODO Auto-generated method stub
-		if(lib.getHm().containsKey(name)) {
-			return true;
-		}
-		return false;
-	}
+		boolean check = lib.getHm().entrySet().stream().anyMatch( (e) -> {
+			if(e.getValue().equals(lib.getHm().get(name))) {
+				return true;
+				} 
+			return false; 
+			});
+		//System.out.println(check);
+		
+		return check;
+	
+}
+	
 }
