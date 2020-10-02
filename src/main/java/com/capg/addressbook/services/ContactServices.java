@@ -9,4 +9,5 @@ public interface ContactServices {
 	public void showContact();
 	public Contact getContact();
 	public void editContact(String fname);
+	public void deleteContact(String firstName);
 }
