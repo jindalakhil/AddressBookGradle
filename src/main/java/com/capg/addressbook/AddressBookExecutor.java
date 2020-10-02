@@ -1,47 +1,56 @@
 package com.capg.addressbook;
 
 import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 import com.capg.addressbook.dto.AddressBook;
+import com.capg.addressbook.dto.AddressBookLibrary;
 import com.capg.addressbook.dto.Contact;
-import com.capg.addressbook.services.impl.ContactImpl;
+import com.capg.addressbook.services.impl.AddressBookImpl;
 
 public class AddressBookExecutor {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Address Book Program");
-		ContactImpl contact = new ContactImpl();
-		//contact.addContact();
-		AddressBook book = new AddressBook();
-		//book.addContact(contact.getContact());
-		//book.getList().stream().forEach(System.out :: println);
+		AddressBookImpl ex = new AddressBookImpl();
+		AddressBookLibrary lib = new AddressBookLibrary();
 		
 		Scanner sc = new Scanner(System.in);
-		int i = 1;
-		while (i != 0) {
-			System.out.println("Enter 1 to add a contact");
-			System.out.println("Enter 2 to edit the contact");
-			System.out.println("Enter 3 to delete the contact");
+		int i =1;
+		while(i!=0) {
+			System.out.println("Enter 1 to create new address book");
+			System.out.println("Enter 2 to edit existing address book");
+			System.out.println("Enter 3 to delete addressbook");
 			System.out.println("Enter 0 to exit");
+			String name = null;
 			i = sc.nextInt();
 			sc.nextLine();
-			switch (i) {
+			switch(i) {
 			case 1:
-				contact.addContact();
-				contact.showContact();
+				System.out.println("Enter the name for address book you want to create");
+				name = sc.nextLine();
+				ex.createAddressBook(name);
 				break;
-		
 			case 2:
-				System.out.println("Update Contact:");
-				System.out.println("Enter first name: ");
-				String firstName = sc.nextLine();
-				contact.editContact(firstName);
+				System.out.println("Enter the name for address book you want to edit");
+				Set set = lib.getHm().entrySet();
+			    Iterator it = set.iterator();
+			 
+			    // Display elements
+			    while(it.hasNext()) {
+			      Map.Entry me = (Map.Entry)it.next();
+			      System.out.print("AddressBook is: "+me.getKey() );
+			    } 
+				name = sc.nextLine();
+				ex.editAddressBook(name);
 				break;
 			case 3:
-				System.out.println("Enter first name to delete: ");
-				String fname = sc.nextLine();
-				contact.deleteContact(fname);
+				System.out.println("Enter the name for address book you want to delete");
+				name = sc.nextLine();
+				ex.deleteAddressBook(name);
+				break;
 			case 0:
 				System.out.println("Exiting the process");
 				break;
