@@ -8,4 +8,5 @@ public interface ContactServices {
 	public void addContact() throws DataTypeException;
 	public void showContact();
 	public Contact getContact();
+	public void editContact(String fname);
 }
