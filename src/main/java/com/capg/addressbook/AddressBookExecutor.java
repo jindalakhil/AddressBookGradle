@@ -1,14 +1,16 @@
 package com.capg.addressbook;
 
 import com.capg.addressbook.dto.Contact;
+import com.capg.addressbook.services.impl.ContactImpl;
 
 public class AddressBookExecutor {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Address Book Program");
-		Contact c = new Contact("first","last","address","city","state",123,"9878989898","as@aad.com");
-		System.out.println(c);
+		ContactImpl contact = new ContactImpl();
+		contact.addContact();
+		contact.showContact();
 	}
 }
 
