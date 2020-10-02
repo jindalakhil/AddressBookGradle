@@ -162,5 +162,18 @@ public class ContactImpl implements ContactServices {
 			 }
 		 showContact();
 	}
+	
+	@Override
+	public void deleteContact(String firstName) {
+		for(Contact x : book.getList()) {
+			if(x.getFname().equalsIgnoreCase(firstName)) {
+				List<Contact> list = book.getList();
+				list.remove(x);
+				System.out.println("Contact deleted");
+				return;
+			}
+		}
+		System.out.println("Contact not found");
+	}
 
 }

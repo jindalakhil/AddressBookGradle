@@ -22,7 +22,7 @@ public class AddressBookExecutor {
 		while (i != 0) {
 			System.out.println("Enter 1 to add a contact");
 			System.out.println("Enter 2 to edit the contact");
-			//System.out.println("Enter 3 to delete the contact");
+			System.out.println("Enter 3 to delete the contact");
 			System.out.println("Enter 0 to exit");
 			i = sc.nextInt();
 			sc.nextLine();
@@ -38,6 +38,10 @@ public class AddressBookExecutor {
 				String firstName = sc.nextLine();
 				contact.editContact(firstName);
 				break;
+			case 3:
+				System.out.println("Enter first name to delete: ");
+				String fname = sc.nextLine();
+				contact.deleteContact(fname);
 			case 0:
 				System.out.println("Exiting the process");
 				break;
