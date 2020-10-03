@@ -23,6 +23,7 @@ public class AddressBookExecutor {
 			System.out.println("Enter 1 to create new address book");
 			System.out.println("Enter 2 to edit existing address book");
 			System.out.println("Enter 3 to delete addressbook");
+			System.out.println("Enter 4 to search by city or state");
 			System.out.println("Enter 0 to exit");
 			String name = null;
 			i = sc.nextInt();
@@ -50,6 +51,13 @@ public class AddressBookExecutor {
 				System.out.println("Enter the name for address book you want to delete");
 				name = sc.nextLine();
 				ex.deleteAddressBook(name);
+				break;
+			case 4:
+				System.out.println("Enter the city");
+				String city = sc.nextLine();
+				System.out.println("Enter the state");
+				String state = sc.nextLine();
+				ex.searchPeople(city, state);
 				break;
 			case 0:
 				System.out.println("Exiting the process");

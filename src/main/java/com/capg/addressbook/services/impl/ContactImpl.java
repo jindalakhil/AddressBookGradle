@@ -13,9 +13,9 @@ public class ContactImpl implements ContactServices {
 	Scanner sc = new Scanner(System.in);
 	ContactValidator valid = new ContactValidator();
 	Contact contact = new Contact();
-	AddressBook book = new AddressBook();
+	//AddressBook book = new AddressBook();
 	@Override
-	public void addContact() throws DataTypeException {
+	public void addContact(AddressBook book) throws DataTypeException {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("Enter the FirstName");
@@ -89,7 +89,7 @@ public class ContactImpl implements ContactServices {
 		}
 	}
 	@Override
-	public void showContact() {
+	public void showContact(AddressBook book) {
 		// TODO Auto-generated method stub
 		System.out.println(contact);
 	}
@@ -100,7 +100,7 @@ public class ContactImpl implements ContactServices {
 	}
 	
 	@Override
-	public void editContact(String fname) {
+	public void editContact(String fname, AddressBook book) {
 		 for(Contact x: book.getList()) {
 			 if(x.getFname().equalsIgnoreCase(fname)) {
 			 int i =1;
@@ -160,11 +160,11 @@ public class ContactImpl implements ContactServices {
 			 }
 			 }
 			 }
-		 showContact();
+		 showContact(book);
 	}
 	
 	@Override
-	public void deleteContact(String firstName) {
+	public void deleteContact(String firstName, AddressBook book) {
 		for(Contact x : book.getList()) {
 			if(x.getFname().equalsIgnoreCase(firstName)) {
 				List<Contact> list = book.getList();

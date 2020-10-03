@@ -50,8 +50,8 @@ public class AddressBookImpl implements AddressBookServices {
 			switch (i) {
 			case 1:
 				try {
-					contact.addContact();
-					contact.showContact();
+					contact.addContact(book);
+					contact.showContact(book);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -62,12 +62,12 @@ public class AddressBookImpl implements AddressBookServices {
 				System.out.println("Update Contact:");
 				System.out.println("Enter first name: ");
 				String firstName = sc.nextLine();
-				contact.editContact(firstName);
+				contact.editContact(firstName, book);
 				break;
 			case 3:
 				System.out.println("Enter first name to delete: ");
 				String fname = sc.nextLine();
-				contact.deleteContact(fname);
+				contact.deleteContact(fname, book);
 			case 0:
 				System.out.println("Exiting the process");
 				break;
@@ -102,7 +102,34 @@ public class AddressBookImpl implements AddressBookServices {
 		//System.out.println(check);
 		
 		return check;
+	}
 	
-}
+	public void searchPeople(String city, String state) {
+//		System.out.println("Entered into searchPeople");
+//		for(Map.Entry<String, AddressBook> entry : lib.getHm().entrySet()) {
+//			for(Contact contact : entry.getValue().getList()) {
+//				System.out.println(contact);
+//			}
+//		}
+////		lib.getHm().entrySet().stream().forEach(e -> {
+////			e.getValue().getList().stream().forEach(x -> System.out.println(x));
+//		});
+		lib.getHm().entrySet().stream().forEach(e -> {
+			e.getValue().getList().stream().forEach(x -> {
+				if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
+					System.out.println(x.getFname() + " " + x.getLname());
+				}
+			});
+		});
+		
+//		lib.getHm().entrySet().stream().forEach(e -> 
+//			e.getValue().getList().stream().filter(x -> {
+//				if(x.getCity().equalsIgnoreCase(city)) {
+//					return true;
+//				}
+//				return false;
+//			}).forEach(x -> System.out.println(x))
+//			);
+	}
 	
 }
