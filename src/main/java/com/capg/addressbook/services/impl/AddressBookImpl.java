@@ -141,7 +141,7 @@ public class AddressBookImpl implements AddressBookServices {
 //				return true;
 //			}
 //			return false;
-//		})).forEach(x -> System.out.println(x.anyMatch(n -> n.getCity().equalsIgnoreCase(city))));
+//		})).forEach(x -> System.out.println(x.count()));
 	}
 	
 	public void searchPeopleWithDictionary(String city, String state) {
@@ -218,5 +218,24 @@ public class AddressBookImpl implements AddressBookServices {
 		}).forEach(n -> System.out.println("state: "+n));
 	}
 	
+	public void personCount(String city, String state) {
+//		long count = lib.getHm().entrySet().stream().map(e ->
+//			e.getValue().getList().stream().filter(x -> {
+//				if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
+//					return true;
+//				}
+//				return false;
+//			})).count();
+		
+		lib.getHm().entrySet().stream().map(e ->
+		e.getValue().getList().stream().filter(x -> {
+			if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
+				return true;
+			}
+			return false;
+		})).forEach(x -> System.out.println(x.count()));
+		
+//		System.out.println("count of person in a given city or state is: "+ count);
+	}
 
 }
