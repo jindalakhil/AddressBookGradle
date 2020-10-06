@@ -12,21 +12,25 @@ import com.capg.addressbook.validator.*;
 public class ContactImpl implements ContactServices {
 	Scanner sc = new Scanner(System.in);
 	ContactValidator valid = new ContactValidator();
-	Contact contact = new Contact();
 	//AddressBook book = new AddressBook();
 	@Override
 	public void addContact(AddressBook book) throws DataTypeException {
 		// TODO Auto-generated method stub
+		Contact contact = new Contact();
 		try {
 			System.out.println("Enter the FirstName");
 			String fname = sc.nextLine();
-			boolean isValid = valid.validateFirstName(fname);
+			boolean isValid = false;
 			while(!isValid) {
-				System.out.println("Invalid First Name, First Name Should have first capital letter and minimum of length 3. Enter the value again ");
-				fname = sc.nextLine();
 				isValid = valid.validateFirstName(fname);
+				if(existance(fname, book) || !isValid) {
+					System.out.println("Fname Already exists or Invalid First Name");
+					fname = sc.nextLine();
+					isValid = valid.validateFirstName(fname);
+				}
 			}
-			contact.setFname(fname);
+				contact.setFname(fname);
+			
 			
 			System.out.println("Enter the Last Name");
 			String lname = sc.nextLine();
@@ -82,7 +86,9 @@ public class ContactImpl implements ContactServices {
 			}
 			contact.setEmail(email);
 			List<Contact> list = book.getList();
+			//list.stream().forEach(n -> System.out.println(n.toString()));
 			list.add(contact);
+		//	list.stream().forEach(n -> System.out.println(n.toString()));
 			book.setList(list);
 		} catch(Exception e) {
 			throw new DataTypeException("Enter the valid datatype");
@@ -91,13 +97,14 @@ public class ContactImpl implements ContactServices {
 	@Override
 	public void showContact(AddressBook book) {
 		// TODO Auto-generated method stub
-		System.out.println(contact);
+		//System.out.println(contact);
+		book.getList().stream().forEach(n -> System.out.println(n.toString()));
 	}
 	
-	@Override
-	public Contact getContact() {
-		return contact;
-	}
+//	@Override
+//	public Contact getContact() {
+//		return contact;
+//	}
 	
 	@Override
 	public void editContact(String fname, AddressBook book) {
@@ -174,6 +181,10 @@ public class ContactImpl implements ContactServices {
 			}
 		}
 		System.out.println("Contact not found");
+	}
+	
+	public boolean existance(String fname, AddressBook book) {
+		return book.getList().stream().anyMatch(n -> n.getFname().equalsIgnoreCase(fname));
 	}
 
 }

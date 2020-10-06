@@ -2,7 +2,10 @@ package com.capg.addressbook.services.impl;
 
 import com.capg.addressbook.dto.*;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+
 
 import com.capg.addressbook.services.AddressBookServices;
 
@@ -11,7 +14,8 @@ public class AddressBookImpl implements AddressBookServices {
 	AddressBookLibrary lib = new AddressBookLibrary();
 	Scanner sc = new Scanner(System.in);
 	ContactImpl contact = new ContactImpl();
-	
+	Map<String,ArrayList<String>> city = new HashMap<>();
+	Map<String,ArrayList<String>> state = new HashMap<>();
 	@Override
 	public void createAddressBook(String name) {
 		// TODO Auto-generated method stub
@@ -111,25 +115,108 @@ public class AddressBookImpl implements AddressBookServices {
 //				System.out.println(contact);
 //			}
 //		}
-////		lib.getHm().entrySet().stream().forEach(e -> {
-////			e.getValue().getList().stream().forEach(x -> System.out.println(x));
+//		lib.getHm().entrySet().stream().forEach(e -> {
+//			e.getValue().getList().stream().forEach(x -> System.out.println(x.toString()));
 //		});
-		lib.getHm().entrySet().stream().forEach(e -> {
-			e.getValue().getList().stream().forEach(x -> {
-				if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
-					System.out.println(x.getFname() + " " + x.getLname());
-				}
-			});
-		});
-		
-//		lib.getHm().entrySet().stream().forEach(e -> 
-//			e.getValue().getList().stream().filter(x -> {
-//				if(x.getCity().equalsIgnoreCase(city)) {
-//					return true;
+//		lib.getHm().entrySet().stream().forEach(e -> {
+//			e.getValue().getList().stream().forEach(x -> {
+//				if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
+//					System.out.println(x.getFname() + " " + x.getLname());
 //				}
-//				return false;
-//			}).forEach(x -> System.out.println(x))
-//			);
+//			});
+//		});
+		
+		lib.getHm().entrySet().stream().forEach(e -> 
+			e.getValue().getList().stream().filter(x -> {
+				if(x.getCity().equalsIgnoreCase(city) || x.getState().equalsIgnoreCase(state)) {
+					return true;
+				}
+				return false;
+			}).forEach(x -> System.out.println(x.getFname() + " " + x.getLname()))
+			);
+		
+//		lib.getHm().entrySet().stream().map(e -> 
+//		e.getValue().getList().stream().filter(x -> {
+//			if(x.getCity().equalsIgnoreCase(city)) {
+//				return true;
+//			}
+//			return false;
+//		})).forEach(x -> System.out.println(x.anyMatch(n -> n.getCity().equalsIgnoreCase(city))));
 	}
 	
+	public void searchPeopleWithDictionary(String city, String state) {
+		Map<String,ArrayList<String>> c = new HashMap<>();
+		Map<String,ArrayList<String>> s = new HashMap<>();
+		
+										
+		
+//		lib.getHm().entrySet().stream().forEach(e -> {
+//			e.getValue().getList().stream().forEach(x -> {
+//				if(c.containsKey(x.getCity()))  {
+//					ArrayList<String> list = c.get(x.getCity());
+//					list.add(x.getFname() + " "+ x.getLname());
+//					c.replace(x.getCity(),list );
+//				} else if (!c.containsKey(x.getCity())) {
+//					ArrayList<String> list = new ArrayList<>();
+//					list.add(x.getFname() + " "+ x.getLname());
+//					c.put(x.getCity(), list );
+//				} else if (s.containsKey(x.getState())) {
+//					ArrayList<String> list = c.get(x.getState());
+//					list.add(x.getFname() + " "+ x.getLname());
+//					c.replace(x.getState(),list );
+//				} else if (!s.containsKey(x.getState())) {
+//					ArrayList<String> list =new ArrayList<>();
+//					list.add(x.getFname() + " "+ x.getLname());
+//					c.put(x.getState(),list );
+//				}
+//			});
+//		});
+			lib.getHm().entrySet().stream()
+								  .map(x -> x.getValue().getList())
+								  .forEach(x -> x.stream().forEach(n -> {
+									  if(c.containsKey(n.getCity())) {
+										  ArrayList<String> list = c.get(n.getCity());
+											list.add(n.getFname() + " "+ n.getLname());
+											c.replace(n.getCity(),list );
+									  } else if (!c.containsKey(n.getCity())) {
+										  ArrayList<String> list = new ArrayList<>();
+											list.add(n.getFname() + " "+ n.getLname());
+											c.put(n.getCity(), list );
+									  }
+									  if (s.containsKey(n.getState())) {
+											ArrayList<String> list = s.get(n.getState());
+											list.add(n.getFname() + " "+ n.getLname());
+											s.replace(n.getState(),list );
+										} else if (!s.containsKey(n.getState())) {
+											ArrayList<String> list =new ArrayList<>();
+											list.add(n.getFname() + " "+ n.getLname());
+											s.put(n.getState(),list );
+										}
+								  }));
+								  
+								  
+								 
+//							
+//								  
+//			
+//		
+//		c.entrySet().stream().forEach(x -> {
+//			x.getValue().stream().forEach(n -> System.out.println(n));
+//		});
+			c.entrySet().stream().filter(n -> {
+				if(n.getKey().equalsIgnoreCase(city)) {
+					return true;
+				}
+				return false;
+			}).forEach(n -> System.out.println("City: "+n));
+		
+		s.entrySet().stream().filter(n -> {
+			if(n.getKey().equalsIgnoreCase(state)) {
+				return true;
+			}
+			return false;
+		}).forEach(n -> System.out.println("state: "+n));
+	}
+	
+
 }

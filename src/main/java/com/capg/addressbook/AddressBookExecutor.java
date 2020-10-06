@@ -57,7 +57,7 @@ public class AddressBookExecutor {
 				String city = sc.nextLine();
 				System.out.println("Enter the state");
 				String state = sc.nextLine();
-				ex.searchPeople(city, state);
+				ex.searchPeopleWithDictionary(city, state);
 				break;
 			case 0:
 				System.out.println("Exiting the process");
