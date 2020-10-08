@@ -49,6 +49,9 @@ public class AddressBookImpl implements AddressBookServices {
 			System.out.println("Enter 2 to edit the contact");
 			System.out.println("Enter 3 to delete the contact");
 			System.out.println("Enter 4 to see the contacts sorted by fname");
+			System.out.println("Enter 5 to see the contacts sorted by city");
+			System.out.println("Enter 6 to see the contacts sorted by state");
+			System.out.println("Enter 7 to see the contacts sorted by zip");
 			System.out.println("Enter 0 to exit");
 			i = sc.nextInt();
 			sc.nextLine();
@@ -76,6 +79,18 @@ public class AddressBookImpl implements AddressBookServices {
 			case 4:
 				System.out.println("Displaying contacts list");
 				System.out.println(contact.showContactSortedByName(book));
+				break;
+			case 5:
+				System.out.println("Displaying contacts list");
+				System.out.println(contact.showContactSortedByCity(book));
+				break;
+			case 6:
+				System.out.println("Displaying contacts list");
+				System.out.println(contact.showContactSortedByState(book));
+				break;
+			case 7:
+				System.out.println("Displaying contacts list");
+				System.out.println(contact.showContactSortedByZip(book));
 				break;
 			case 0:
 				System.out.println("Exiting the process");

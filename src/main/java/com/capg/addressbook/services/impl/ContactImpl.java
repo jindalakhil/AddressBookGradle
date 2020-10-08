@@ -72,7 +72,7 @@ public class ContactImpl implements ContactServices {
 			isValid = valid.validatePhoneNumber(phone);
 			while(!isValid) {
 				System.out.println("Invalid phone number ");
-				lname = sc.nextLine();
+				phone = sc.nextLine();
 				isValid = valid.validatePhoneNumber(phone);
 			}
 			contact.setPhoneNumber(phone);
@@ -82,7 +82,7 @@ public class ContactImpl implements ContactServices {
 			isValid = valid.validateEmail(email);
 			while(!isValid) {
 				System.out.println("Invalid email ");
-				lname = sc.nextLine();
+				email = sc.nextLine();
 				isValid = valid.validateEmail(email);
 			}
 			contact.setEmail(email);
@@ -105,6 +105,21 @@ public class ContactImpl implements ContactServices {
 	public List<Contact> showContactSortedByName(AddressBook book) {
 		// TODO Auto-generated method stub
 		return book.getList().stream().sorted((n1, n2) -> n1.getFname().compareTo(n2.getFname())).collect(Collectors.toList());
+	}
+	
+	public List<Contact> showContactSortedByState(AddressBook book) {
+		// TODO Auto-generated method stub
+		return book.getList().stream().sorted((n1, n2) -> n1.getState().compareTo(n2.getState())).collect(Collectors.toList());
+	}
+	
+	public List<Contact> showContactSortedByCity(AddressBook book) {
+		// TODO Auto-generated method stub
+		return book.getList().stream().sorted((n1, n2) -> n1.getCity().compareTo(n2.getCity())).collect(Collectors.toList());
+	}
+	
+	public List<Contact> showContactSortedByZip(AddressBook book) {
+		// TODO Auto-generated method stub
+		return book.getList().stream().sorted((n1, n2) -> ((Integer)n1.getZip()).compareTo((Integer)n2.getZip())).collect(Collectors.toList());
 	}
 //	@Override
 //	public Contact getContact() {
