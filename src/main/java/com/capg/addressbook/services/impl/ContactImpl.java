@@ -2,6 +2,7 @@ package com.capg.addressbook.services.impl;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.capg.addressbook.dto.AddressBook;
 import com.capg.addressbook.dto.Contact;
@@ -101,6 +102,10 @@ public class ContactImpl implements ContactServices {
 		book.getList().stream().forEach(n -> System.out.println(n.toString()));
 	}
 	
+	public List<Contact> showContactSortedByName(AddressBook book) {
+		// TODO Auto-generated method stub
+		return book.getList().stream().sorted((n1, n2) -> n1.getFname().compareTo(n2.getFname())).collect(Collectors.toList());
+	}
 //	@Override
 //	public Contact getContact() {
 //		return contact;
