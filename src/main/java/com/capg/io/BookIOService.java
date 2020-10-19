@@ -1,13 +1,20 @@
 package com.capg.io;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -26,6 +33,7 @@ import com.capg.addressbook.validator.*;
 public class BookIOService {
 
 	private static final String SAMPLE_CSV_FILE_PATH = "addressBookfile.csv";
+	private static final String CONTACT_FILE_NAME_GSON = "book.json";
 	public static String CONTACT_FILE_NAME= "addressBook.txt";
 
 	public void readData() {
@@ -90,6 +98,36 @@ public class BookIOService {
 				return false;
 			}
 			return true;
+		}
+		
+		public boolean writeJsonData(List<Contact> contactList) {
+			Gson gson = new Gson();
+			String json = gson.toJson(contactList);
+			try {
+				FileWriter fileWriter = new FileWriter(CONTACT_FILE_NAME_GSON);
+				fileWriter.write(json);
+				fileWriter.close();
+				return true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+
+		public boolean readJsonFile(){
+			try {
+				Reader reader = Files.newBufferedReader(Paths.get(CONTACT_FILE_NAME_GSON));
+				JsonParser jsonParser = new JsonParser();
+				JsonElement obj = jsonParser.parse(reader);
+				JsonArray contactList = (JsonArray) obj;
+				System.out.println(contactList);
+
+				return true;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 
 }
