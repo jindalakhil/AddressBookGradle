@@ -92,8 +92,8 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact [fname=" + fname + ", lname=" + lname + ", address=" + address + ", city=" + city + ", state="
-				+ state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
+		return "fname " + fname + " lname " + lname + " address " + address + " city " + city + " state "
+				+ state + " zip " + zip + " phoneNumber " + phoneNumber + " email "  + email;
 	}
 	
 }
