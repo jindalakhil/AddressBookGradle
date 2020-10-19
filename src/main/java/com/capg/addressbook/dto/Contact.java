@@ -1,13 +1,31 @@
 package com.capg.addressbook.dto;
 
+import com.opencsv.bean.CsvBindByName;
+
+
 public class Contact {
+	@CsvBindByName
 	private String fname;
+	
+	@CsvBindByName
 	private String lname;
+	
+	@CsvBindByName
 	private String address;
+	
+	@CsvBindByName
 	private String city;
+	
+	@CsvBindByName
 	private String state;
+	
+	@CsvBindByName
 	private int zip;
+	
+	@CsvBindByName
 	private String phoneNumber;
+	
+	@CsvBindByName
 	private String email;
 	
 	public Contact() {
